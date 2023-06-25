@@ -7,8 +7,8 @@ class PropertiesController < ApplicationController
       @properties = Property.where(owner: params[:owner])
     elsif params[:bedrooms] || params[:bathrooms]
       @properties = Property.where(bedrooms: params[:bedrooms], bathrooms: params[:bathrooms])
-    elsif params[:address]
-      @properties = Property.where('address ILIKE ?', "%#{params[:address]}%")
+    elsif params[:property_address]
+      @properties = Property.where('property_address ILIKE ?', "%#{params[:property_address]}%")
     else
       @properties = Property.all
     end
@@ -74,6 +74,6 @@ class PropertiesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def property_params
-    params.require(:property).permit(:address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_to)
+    params.require(:property).permit(:property_address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_from, :valid_to)
   end
 end

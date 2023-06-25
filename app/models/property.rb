@@ -1,5 +1,7 @@
 class Property < ApplicationRecord
-  validates :address, presence: true
+  self.table_name = 'properties' # Specify the table name if it's different from the default 'properties' table
+
+  validates :property_address, presence: true
   validates :property_type, presence: true
   validates :bedrooms, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :sitting_rooms, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
