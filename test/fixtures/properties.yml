@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  property_address: MyString
+  property_type: MyString
+  bedrooms: 1
+  sitting_rooms: 1
+  kitchens: 1
+  bathrooms: 1
+  toilets: 1
+  owner: MyString
+  description: MyString
+  valid_from: 2023-06-25
+  valid_to: 2023-06-25
+
+two:
+  property_address: MyString
+  property_type: MyString
+  bedrooms: 1
+  sitting_rooms: 1
+  kitchens: 1
+  bathrooms: 1
+  toilets: 1
+  owner: MyString
+  description: MyString
+  valid_from: 2023-06-25
+  valid_to: 2023-06-25
