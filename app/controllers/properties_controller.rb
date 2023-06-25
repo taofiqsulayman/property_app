@@ -77,3 +77,4 @@ class PropertiesController < ApplicationController
     params.require(:property).permit(:property_address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_from, :valid_to)
   end
 end
+
