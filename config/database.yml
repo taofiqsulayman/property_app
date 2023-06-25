@@ -9,3 +9,7 @@ default: &default
 development:
   <<: *default
   database: properties_app
+
+test:
+  <<: *default
+  database: property_app_test
