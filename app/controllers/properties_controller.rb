@@ -1,9 +1,17 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: %i[ show edit update destroy ]
+  before_action :set_property, only: %i[show edit update destroy]
 
   # GET /properties or /properties.json
   def index
-    @properties = Property.all
+    if params[:owner]
+      @properties = Property.where(owner: params[:owner])
+    elsif params[:bedrooms] || params[:bathrooms]
+      @properties = Property.where(bedrooms: params[:bedrooms], bathrooms: params[:bathrooms])
+    elsif params[:address]
+      @properties = Property.where('address ILIKE ?', "%#{params[:address]}%")
+    else
+      @properties = Property.all
+    end
   end
 
   # GET /properties/1 or /properties/1.json
@@ -58,13 +66,14 @@ class PropertiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = Property.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def property_params
-      params.require(:property).permit(:property_address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_from, :valid_to)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_property
+    @property = Property.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def property_params
+    params.require(:property).permit(:address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_to)
+  end
 end
