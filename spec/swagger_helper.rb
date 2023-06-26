@@ -18,7 +18,7 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'Lekki Properties API',
+        title: 'Lekki Properties API -by TS',
         version: 'v1'
       },
       paths: {},
@@ -27,7 +27,7 @@ RSpec.configure do |config|
           url: 'http://{defaultHost}',
           variables: {
             defaultHost: {
-              default: '127.0.0.1:3000'
+              default: 'https://property-klky.onrender.com'
             }
           }
         }
