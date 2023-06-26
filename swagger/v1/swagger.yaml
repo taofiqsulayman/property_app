@@ -15,6 +15,48 @@ paths:
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                property_address:
+                  type: string
+                property_type:
+                  type: string
+                bathrooms:
+                  type: integer
+                bedrooms:
+                  type: integer
+                sitting_rooms:
+                  type: integer
+                toilets:
+                  type: integer
+                kitchens:
+                  type: integer
+                owner:
+                  type: string
+                description:
+                  type: string
+                valid_from:
+                  type: string
+                  format: date
+                valid_to:
+                  type: string
+                  format: date
+              required:
+              - property_address
+              - property_type
+              - valid_from
+              - valid_to
+              - description
+              - owner
+              - kitchens
+              - toilets
+              - bathrooms
+              - bedrooms
+              - sitting_rooms
   "/api/v1/properties/{id}":
     parameters:
     - name: id
@@ -28,16 +70,32 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update property
-      responses:
-        '200':
-          description: successful
     put:
       summary: update property
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bathrooms:
+                  type: integer
+                bedrooms:
+                  type: integer
+                sitting_rooms:
+                  type: integer
+                toilets:
+                  type: integer
+                kitchens:
+                  type: integer
+                description:
+                  type: string
+                valid_to:
+                  type: string
+                  format: date
     delete:
       summary: delete property
       responses:

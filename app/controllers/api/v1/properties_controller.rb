@@ -5,6 +5,7 @@ module Api
 
       # This is to allow cross origin requests for the API
       skip_before_action :verify_authenticity_token, only: [:create]
+      skip_before_action :verify_authenticity_token, only: [:update, :destroy]
 
       before_action :set_property, only: %i[show edit update destroy]
 
@@ -55,41 +56,30 @@ module Api
       end
 
       # POST /properties or /properties.json
-      def create
-        @property = Property.new(property_params)
 
-        respond_to do |format|
-          if @property.save
-            format.html { redirect_to property_url(@property), notice: "Property was successfully created." }
-            format.json { render :show, status: :created, location: @property }
-          else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @property.errors, status: :unprocessable_entity }
-          end
-        end
+      def create
+        property = Property.create!(property_params)
+          render json: { status: 201, message: "Property created successfully", data: property }, status: 201
+        rescue ActiveRecord::RecordInvalid => invalid
+          render json: { status: 400, message: invalid.record.errors.full_messages }, status: 400
       end
 
       # PUT /properties/1 or /properties/1.json
       def update
-        respond_to do |format|
-          if @property.update(update_property_params)
-            format.html { redirect_to property_url(@property), notice: "Property was successfully updated." }
-            format.json { render :show, status: :ok, location: @property }
-          else
-            format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @property.errors, status: :unprocessable_entity }
-          end
+        begin
+          property = Property.find(params[:id])
+        rescue => exception
+          render json: { status: 404, message: "Property not found" }, status: 404
+        else
+          property.update!(update_property_params)
+          render json: { status: 200, message: "Property updated successfully", data: property }
         end
       end
 
       # DELETE /properties/1 or /properties/1.json
       def destroy
         @property.destroy
-
-        respond_to do |format|
-          format.html { redirect_to properties_url, notice: "Property was successfully destroyed." }
-          format.json { head :no_content }
-        end
+        render json: { status: 200, message: "Property deleted successfully" }
       end
 
       private
