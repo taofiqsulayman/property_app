@@ -1,8 +1,8 @@
 require 'swagger_helper'
 
-RSpec.describe 'properties', type: :request do
+RSpec.describe 'api/v1/properties', type: :request do
 
-  path '/properties' do
+  path '/api/v1/properties' do
 
     get('list properties') do
       response(200, 'successful') do
@@ -33,44 +33,7 @@ RSpec.describe 'properties', type: :request do
     end
   end
 
-  path '/properties/new' do
-
-    get('new property') do
-      response(200, 'successful') do
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-  end
-
-  path '/properties/{id}/edit' do
-    # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
-
-    get('edit property') do
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-  end
-
-  path '/properties/{id}' do
+  path '/api/v1/properties/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
@@ -122,6 +85,46 @@ RSpec.describe 'properties', type: :request do
     delete('delete property') do
       response(200, 'successful') do
         let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/properties/owner/{owner}' do
+    # You'll want to customize the parameter types...
+    parameter name: 'owner', in: :path, type: :string, description: 'owner'
+
+    get('properties_by_owner property') do
+      response(200, 'successful') do
+        let(:owner) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/properties/address/{address}' do
+    # You'll want to customize the parameter types...
+    parameter name: 'address', in: :path, type: :string, description: 'address'
+
+    get('find_by_address property') do
+      response(200, 'successful') do
+        let(:address) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {
