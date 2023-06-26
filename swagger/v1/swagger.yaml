@@ -4,7 +4,7 @@ info:
   title: Lekki Properties API by TS
   version: v1
 paths:
-  "/api/v1/properties":
+  '/api/v1/properties':
     get:
       summary: list properties
       responses:
@@ -46,25 +46,25 @@ paths:
                   type: string
                   format: date
               required:
-              - property_address
-              - property_type
-              - valid_from
-              - valid_to
-              - description
-              - owner
-              - kitchens
-              - toilets
-              - bathrooms
-              - bedrooms
-              - sitting_rooms
-  "/api/v1/properties/{id}":
+                - property_address
+                - property_type
+                - valid_from
+                - valid_to
+                - description
+                - owner
+                - kitchens
+                - toilets
+                - bathrooms
+                - bedrooms
+                - sitting_rooms
+  '/api/v1/properties/{id}':
     parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
     get:
       summary: show property
       responses:
@@ -101,34 +101,34 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/properties/owner/{owner}":
+  '/api/v1/properties/owner/{owner}':
     parameters:
-    - name: owner
-      in: path
-      description: owner
-      required: true
-      schema:
-        type: string
+      - name: owner
+        in: path
+        description: owner
+        required: true
+        schema:
+          type: string
     get:
       summary: properties_by_owner property
       responses:
         '200':
           description: successful
-  "/api/v1/properties/address/{address}":
+  '/api/v1/properties/address/{address}':
     parameters:
-    - name: address
-      in: path
-      description: address
-      required: true
-      schema:
-        type: string
+      - name: address
+        in: path
+        description: address
+        required: true
+        schema:
+          type: string
     get:
       summary: find_by_address property
       responses:
         '200':
           description: successful
 servers:
-- url: http://{defaultHost}
-  variables:
-    defaultHost:
-      default: https://property-klky.onrender.com
+  - url: https://{defaultHost}
+    variables:
+      defaultHost:
+        default: property-klky.onrender.com

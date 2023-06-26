@@ -27,7 +27,7 @@ RSpec.configure do |config|
           url: 'http://{defaultHost}',
           variables: {
             defaultHost: {
-              default: 'https://property-klky.onrender.com'
+              default: 'property-klky.onrender.com'
             }
           }
         }
