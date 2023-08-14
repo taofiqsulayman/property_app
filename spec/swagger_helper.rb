@@ -18,8 +18,9 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'Lekki Properties API',
-        version: 'v2'
+        title: 'Lekki Properties API Documentation',
+        version: 'v2',
+        description: 'This is the API documentation for the Lekki Properties API'
       },
       paths: {},
       servers: [

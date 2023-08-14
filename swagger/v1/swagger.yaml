@@ -1,8 +1,9 @@
 ---
 openapi: 3.0.1
 info:
-  title: Lekki Properties API
+  title: Lekki Properties API Documentation
   version: v2
+  description: This is the API documentation for the Lekki Properties API
 paths:
   "/api/v1/properties":
     post:
@@ -178,7 +179,7 @@ paths:
         '404':
           description: property not found
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
       default: property-klky.onrender.com
