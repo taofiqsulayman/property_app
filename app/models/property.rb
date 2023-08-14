@@ -1,6 +1,6 @@
 class Property < ApplicationRecord
-  validates :address, :property_type, :num_bedrooms, :num_sitting_rooms, :num_kitchens, :num_bathrooms, :num_toilets, :owner, :description, :valid_from, :valid_to, presence: true
-  validates :num_bedrooms, :num_sitting_rooms, :num_kitchens, :num_bathrooms, :num_toilets, numericality: { only_integer: true }
+  validates :property_address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_from, :valid_to, presence: true
+  validates :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, numericality: { only_integer: true }
   validates :description, length: { maximum: 500 }
   validate :valid_date?
 

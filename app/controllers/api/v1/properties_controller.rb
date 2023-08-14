@@ -6,10 +6,10 @@ module Api
       def index
         if params[:owner].present?
           @properties = Property.where(owner: params[:owner])
-        elsif params[:num_bedrooms].present? || params[:num_bathrooms].present?
-          @properties = Property.where('num_bedrooms = ? AND num_bathrooms = ?', params[:num_bedrooms], params[:num_bathrooms])
+        elsif params[:bedrooms].present? || params[:bathrooms].present?
+          @properties = Property.where('bedrooms = ? AND bathrooms = ?', params[:bedrooms], params[:bathrooms])
         elsif params[:address].present?
-          @properties = Property.where("address LIKE ?", "%#{params[:address]}%")
+          @properties = Property.where("property_address LIKE ?", "%#{params[:address]}%")
         else
           @properties = Property.all
         end
@@ -50,7 +50,7 @@ module Api
       end
 
       def property_params
-        params.require(:property).permit(:address, :property_type, :num_bedrooms, :num_sitting_rooms, :num_kitchens, :num_bathrooms, :num_toilets, :owner, :description, :valid_from, :valid_to)
+        params.require(:property).permit(:property_address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_from, :valid_to)
       end
 
       def update_property_params

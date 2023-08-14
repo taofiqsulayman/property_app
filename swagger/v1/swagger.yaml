@@ -22,19 +22,19 @@ paths:
             schema:
               type: object
               properties:
-                address:
+                property_address:
                   type: string
                 property_type:
                   type: string
-                num_bedrooms:
+                bedrooms:
                   type: integer
-                num_sitting_rooms:
+                sitting_rooms:
                   type: integer
-                num_kitchens:
+                kitchens:
                   type: integer
-                num_bathrooms:
+                bathrooms:
                   type: integer
-                num_toilets:
+                toilets:
                   type: integer
                 owner:
                   type: string
@@ -47,13 +47,13 @@ paths:
                   type: string
                   format: date-time
               required:
-              - address
+              - property_address
               - property_type
-              - num_bedrooms
-              - num_sitting_rooms
-              - num_kitchens
-              - num_bathrooms
-              - num_toilets
+              - bedrooms
+              - sitting_rooms
+              - kitchens
+              - bathrooms
+              - toilets
               - owner
               - description
               - valid_from
@@ -68,12 +68,12 @@ paths:
         description: Owner of the properties
         schema:
           type: string
-      - name: num_bedrooms
+      - name: bedrooms
         in: query
         description: Number of bedrooms in the properties
         schema:
           type: integer
-      - name: num_bathrooms
+      - name: bathrooms
         in: query
         description: Number of bathrooms in the properties
         schema:
@@ -109,19 +109,19 @@ paths:
                 properties:
                   id:
                     type: integer
-                  address:
+                  property_address:
                     type: string
                   property_type:
                     type: string
-                  num_bedrooms:
+                  bedrooms:
                     type: integer
-                  num_sitting_rooms:
+                  sitting_rooms:
                     type: integer
-                  num_kitchens:
+                  kitchens:
                     type: integer
-                  num_bathrooms:
+                  bathrooms:
                     type: integer
-                  num_toilets:
+                  toilets:
                     type: integer
                   owner:
                     type: string
@@ -135,13 +135,13 @@ paths:
                     format: date-time
                 required:
                 - id
-                - address
+                - property_address
                 - property_type
-                - num_bedrooms
-                - num_sitting_rooms
-                - num_kitchens
-                - num_bathrooms
-                - num_toilets
+                - bedrooms
+                - sitting_rooms
+                - kitchens
+                - bathrooms
+                - toilets
                 - owner
                 - description
                 - valid_from
