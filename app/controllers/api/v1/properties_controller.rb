@@ -1,6 +1,10 @@
 module Api
   module V1
     class PropertiesController < ApplicationController
+
+      # This is to allow cross origin requests for the API
+      skip_before_action :verify_authenticity_token, only: [:create]
+      skip_before_action :verify_authenticity_token, only: [:update, :destroy]
       before_action :set_property, only: [:show, :update, :destroy]
 
       def index
