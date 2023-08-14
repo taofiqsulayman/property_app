@@ -13,9 +13,9 @@ end
 Swagger::Blocks.build_root_json do
   swagger '2.0'
   info do
-    title 'Your API Title'
-    version '1.0.0'
-    description 'Description of your API'
+    title 'Lekki Properties API Documentation'
+    version '2.0.0'
+    description 'This document defines user requirements for the API Service for the Property Onboarding / Offboarding process of the Lekki project.'
   end
 
   # Include paths from all controllers

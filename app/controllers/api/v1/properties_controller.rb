@@ -1,103 +1,61 @@
 module Api
   module V1
-
     class PropertiesController < ApplicationController
+      before_action :set_property, only: [:show, :update, :destroy]
 
-      # This is to allow cross origin requests for the API
-      skip_before_action :verify_authenticity_token, only: [:create]
-      skip_before_action :verify_authenticity_token, only: [:update, :destroy]
-
-      before_action :set_property, only: %i[show edit update destroy]
-
-      # GET /properties or /properties.json
       def index
-        @properties = Property.all
-        render json: @properties
-      end
-
-      # GET /properties/1 or /properties/1.json
-      def show
-        render json: @property
-      end
-
-      #get  properties by owner name
-      def properties_by_owner
-        @properties = Property.where('lOWER(owner) = ?', params[:owner].downcase)
-        render json: @properties
-      end
-
-      #GET  properties by params
-      def findPropertiesByParams
-        if params[:owner]
+        if params[:owner].present?
           @properties = Property.where(owner: params[:owner])
-        elsif params[:bedrooms] || params[:bathrooms]
-          @properties = Property.where(bedrooms: params[:bedrooms], bathrooms: params[:bathrooms])
-        elsif params[:property_address]
-          @properties = Property.where('LOWER(property_address) ILIKE ?', "%#{params[:property_address].downcase}%")
+        elsif params[:num_bedrooms].present? || params[:num_bathrooms].present?
+          @properties = Property.where('num_bedrooms = ? AND num_bathrooms = ?', params[:num_bedrooms], params[:num_bathrooms])
+        elsif params[:address].present?
+          @properties = Property.where("address LIKE ?", "%#{params[:address]}%")
         else
           @properties = Property.all
         end
-        render json: @properties
+
+        render json: @properties, status: :ok
       end
 
-      #get property by address
-      def filter_by_address
-        @properties = Property.where("LOWER(property_address) LIKE ?", "%#{params[:property_address].downcase}%")
-        render json: @properties
+      def show
+        render json: @property, status: :ok
       end
-
-      # GET /properties/new
-      def new
-        @property = Property.new
-      end
-
-      # GET /properties/1/edit
-      def edit
-      end
-
-      # POST /properties or /properties.json
 
       def create
-        property = Property.create!(property_params)
-          render json: { status: 201, message: "Property created successfully", data: property }, status: 201
-        rescue ActiveRecord::RecordInvalid => invalid
-          render json: { status: 400, message: invalid.record.errors.full_messages }, status: 400
-      end
-
-      # PUT /properties/1 or /properties/1.json
-      def update
-        begin
-          property = Property.find(params[:id])
-        rescue => exception
-          render json: { status: 404, message: "Property not found" }, status: 404
+        @property = Property.new(property_params)
+        if @property.save
+          render json: @property, status: :created
         else
-          property.update!(update_property_params)
-          render json: { status: 200, message: "Property updated successfully", data: property }
+          render json: @property.errors, status: :unprocessable_entity
         end
       end
 
-      # DELETE /properties/1 or /properties/1.json
+      def update
+        if @property.update(update_property_params)
+          render json: @property, status: :ok
+        else
+          render json: @property.errors, status: :unprocessable_entity
+        end
+      end
+
       def destroy
         @property.destroy
-        render json: { status: 200, message: "Property deleted successfully" }
+        head :no_content, status: :ok
       end
 
       private
 
-      # Use callbacks to share common setup or constraints between actions.
       def set_property
         @property = Property.find(params[:id])
       end
 
-      # Only allow a list of trusted parameters through.
       def property_params
-        params.require(:property).permit(:property_address, :property_type, :bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :owner, :description, :valid_from, :valid_to)
+        params.require(:property).permit(:address, :property_type, :num_bedrooms, :num_sitting_rooms, :num_kitchens, :num_bathrooms, :num_toilets, :owner, :description, :valid_from, :valid_to)
       end
 
       def update_property_params
         params.require(:property).permit(:bedrooms, :sitting_rooms, :kitchens, :bathrooms, :toilets, :description, :valid_to)
       end
     end
-
   end
 end
