@@ -16,6 +16,8 @@ paths:
           description: property created
         '422':
           description: invalid request
+        '400':
+          description: invalid parameters
       requestBody:
         content:
           application/json:

@@ -34,6 +34,11 @@ RSpec.describe 'api/v1/properties', type: :request do
         let(:property) { { property_address: 'Doe' } }
         run_test!
       end
+
+      response '400', 'invalid parameters' do
+        let(:property) { { property_address: 'Doe' } }
+        run_test!
+      end
     end
 
     get 'Retrieves properties' do
