@@ -4,12 +4,14 @@ class Property < ApplicationRecord
   validates :description, length: { maximum: 500 }
   validate :valid_date?
 
-  geocoded_by :property_address
+  validate :address_must_be_valid
 
-  after_validation :geocode,
-    if: ->(obj){ obj.property_address.present? and obj.property_address_changed? }
+  # geocoded_by :property_address
 
-  validate :property_address_must_exist
+  # after_validation :geocode,
+  #   if: ->(obj){ obj.property_address.present? and obj.property_address_changed? }
+
+  # validate :property_address_must_exist
 
   private
 
@@ -19,10 +21,15 @@ class Property < ApplicationRecord
     end
   end
 
-  def property_address_must_exist
-    if self.latitude.nil? || self.longitude.nil?
-      errors.add(:property_address, "This address doesn't exist.")
-    end
+  # def property_address_must_exist
+  #   if self.latitude.nil? || self.longitude.nil?
+  #     errors.add(:property_address, "This address doesn't exist.")
+  #   end
+  # end
+
+  def address_must_be_valid
+    results = Geocoder.search(property_address)
+    errors.add(:property_address, "doesn't exist") if results.empty?
   end
 
 end
