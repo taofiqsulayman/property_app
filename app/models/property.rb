@@ -20,7 +20,7 @@ class Property < ApplicationRecord
     geocoder = OpenCage::Geocoder.new(api_key: '43793764fe8e4cd1997acf1f1b9ce528')
     results = geocoder.geocode(property_address)
 
-    if results.empty?
+    if !results
       errors.add(:property_address, 'This address is not invalid')
     end
   end
