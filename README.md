@@ -47,4 +47,4 @@ Customize the project settings, such as routes, views, and models, based on your
 See [Configuration Reference](https://guides.rubyonrails.org/).
 
 ## Credits
-- Babatunde Oladejo [Sulaymantaofiq@gmail.com](mailto:sulaymantaofiq@gmail.com)
+- Taofiq Sulayman [Sulaymantaofiq@gmail.com](mailto:sulaymantaofiq@gmail.com)
