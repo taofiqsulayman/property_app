@@ -30,15 +30,15 @@ module Api
         if @property.save
           render json: @property, status: :created
         else
-          render json: @property.errors, status: :unprocessable_entity
+          render json: { error: @property.errors.full_messages.to_sentence }, status: :unprocessable_entity
         end
       end
 
       def update
-        if @property.update(update_property_params)
+        if @property.update(property_params)
           render json: @property, status: :ok
         else
-          render json: @property.errors, status: :unprocessable_entity
+          render json: { error: @property.errors.full_messages.to_sentence }, status: :unprocessable_entity
         end
       end
 
