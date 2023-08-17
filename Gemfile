@@ -49,7 +49,6 @@ gem "bootsnap", require: false
 
 # add geocoding gem
 gem 'opencage-geocoder'
-gem 'rest-client'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
