@@ -4,7 +4,7 @@ class Property < ApplicationRecord
   validates :description, length: { maximum: 500 }
   validate :valid_date?
 
-  validate :address_must_be_valid
+  validate :validate_address
 
   private
 
@@ -14,10 +14,21 @@ class Property < ApplicationRecord
     end
   end
 
-  def address_must_be_valid
-    results = Geocoder.search(property_address)
-    if results.empty? || !results.first.types.include?('street_address')
-      errors.add(:property_address, "This address doesn't exist")
+  def validate_address
+    require 'opencage/geocoder'
+
+    return unless address_changed?
+
+    geocoder = OpenCage::Geocoder.new(api_key: '43793764fe8e4cd1997acf1f1b9ce528')
+    results = geocoder.geocode(property_address)
+
+    p results.first.address
+
+    if results.empty?
+      errors.add(:property_address, 'This address is not invalid')
+    else
+      self.latitude = results.first.latitude
+      self.longitude = results.first.longitude
     end
   end
 
