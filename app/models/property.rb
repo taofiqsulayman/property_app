@@ -17,8 +17,6 @@ class Property < ApplicationRecord
   def validate_address
     require 'opencage/geocoder'
 
-    return unless address_changed?
-
     geocoder = OpenCage::Geocoder.new(api_key: '43793764fe8e4cd1997acf1f1b9ce528')
     results = geocoder.geocode(property_address)
 
