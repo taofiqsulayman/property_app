@@ -1,3 +1,4 @@
+
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -7,11 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: properties_app
+  database: property_management_app
 
 test:
   <<: *default
-  database: property_app_test
+  database: property_management_app_test
 
 production:
   <<: *default
