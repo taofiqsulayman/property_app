@@ -25,6 +25,26 @@ module Api
         render json: @property, status: :ok
       end
 
+      def by_owner
+        @properties = Property.where(owner: params[:owner])
+        render json: @properties, status: :ok
+      end
+
+      def by_address
+        @properties = Property.where("property_address LIKE ?", "%#{params[:address]}%")
+        render json: @properties, status: :ok
+      end
+
+      def by_bedrooms
+        @properties = Property.where(bedrooms: params[:bedrooms])
+        render json: @properties, status: :ok
+      end
+
+      def by_bathrooms
+        @properties = Property.where(bathrooms: params[:bathrooms])
+        render json: @properties, status: :ok
+      end
+
       def create
         @property = Property.new(property_params)
         if @property.save
