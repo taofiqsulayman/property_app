@@ -93,6 +93,7 @@ paths:
           description: properties found
         '404':
           description: properties not found
+
   "/api/v1/properties/{id}":
     get:
       summary: Retrieves a property
@@ -153,6 +154,44 @@ paths:
                 - valid_to
         '404':
           description: property not found
+
+  "/api/v1/properties/owners/{owner}":
+    parameters:
+      - in: path
+        name: owner
+        required: true
+        description: Owner name
+        schema:
+          type: string
+    get:
+      summary: Retrieve multiple properties for a given owner
+      tags:
+        - Properties
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+  "/api/v1/properties/addresses/{address}":
+    parameters:
+      - in: path
+        name: address
+        required: true
+        description: Property address
+        schema:
+          type: string
+    get:
+      summary: Get a property by address
+      tags:
+        - Properties
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+  "/api/v1/properties/{id}":
     put:
       summary: Updates a property
       tags:
@@ -183,72 +222,7 @@ paths:
           description: property deleted
         '404':
           description: property not found
-  "/api/v1/properties/owners/{owner}":
-    parameters:
-      - in: path
-        name: owner
-        required: true
-        description: Owner name
-        schema:
-          type: string
-    get:
-      summary: Retrieve multiple properties for a given owner
-      tags:
-        - Properties
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Property'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponseWithData'
-  "/api/v1/properties/addresses/{address}":
-    parameters:
-      - in: path
-        name: address
-        required: true
-        description: Property address
-        schema:
-          type: string
-    get:
-      summary: Get a property by address
-      tags:
-        - Properties
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    $ref: '#/components/schemas/Property'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponseWithData'
+
 components:
   schemas:
     Property:
@@ -281,17 +255,5 @@ components:
           type: string
           format: date-time
 
-    ErrorResponseWithData:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-        data:
-          type: object
 servers:
-- url: https://{defaultHost}
-  variables:
-    defaultHost:
-      default: property-klky.onrender.com
+- url: https://property-klky.onrender.com
