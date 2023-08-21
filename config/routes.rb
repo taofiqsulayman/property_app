@@ -12,10 +12,10 @@ Rails.application.routes.draw do
       put '/properties/:id', to: 'properties#update'
       delete '/properties/:id', to: 'properties#destroy'
 
-      get '/properties/owner/:owner', to: 'properties#by_owner'
+      get '/properties/owners/:owner', to: 'properties#by_owner'
       get '/properties/bedrooms/:bedrooms', to: 'properties#by_bedrooms'
       get '/properties/bathrooms/:bathrooms', to: 'properties#by_bathrooms'
-      get '/properties/address/:address', to: 'properties#by_address'
+      get '/properties/addresses/:address', to: 'properties#by_address'
     end
   end
 end
