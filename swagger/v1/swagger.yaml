@@ -192,50 +192,52 @@ paths:
           description: Not Found
 
   "/api/v1/properties/filter/{property}":
-    parameters:
-    - name: owner
-      in: query
-      description: Owner of the property
-      schema:
-        type: string
-    - name: property_type
-      in: query
-      description: Type of the property
-      schema:
-        type: string
-    - name: bedrooms
-      in: query
-      description: Number of bedrooms
-      schema:
-        type: integer
-    - name: sitting_rooms
-      in: query
-      description: Number of sitting rooms
-      schema:
-        type: integer
-    - name: kitchens
-      in: query
-      description: Number of kitchens
-      schema:
-        type: integer
-    - name: bathrooms
-      in: query
-      description: Number of bathrooms
-      schema:
-        type: integer
-    - name: toilets
-      in: query
-      description: Number of toilets
-      schema:
-        type: integer
-    - name: valid_to
-      in: query
-      format: date
-      description: Validity date of the property
-      schema:
-        type: string
     get:
       summary: Retrieve multiple properties using additional filters
+      tags:
+      - Properties
+      parameters:
+      - name: owner
+        in: query
+        description: Owner of the property
+        schema:
+          type: string
+      - name: property_type
+        in: query
+        description: Type of the property
+        schema:
+          type: string
+      - name: bedrooms
+        in: query
+        description: Number of bedrooms
+        schema:
+          type: integer
+      - name: sitting_rooms
+        in: query
+        description: Number of sitting rooms
+        schema:
+          type: integer
+      - name: kitchens
+        in: query
+        description: Number of kitchens
+        schema:
+          type: integer
+      - name: bathrooms
+        in: query
+        description: Number of bathrooms
+        schema:
+          type: integer
+      - name: toilets
+        in: query
+        description: Number of toilets
+        schema:
+          type: integer
+      - name: valid_to
+        in: query
+        format: date
+        description: Validity date of the property
+        schema:
+          type: string
       responses:
         '200':
           description: successful
