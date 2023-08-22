@@ -191,7 +191,7 @@ paths:
         '404':
           description: Not Found
 
-"/api/v1/properties/filter/{property}":
+  "/api/v1/properties/filter/{property}":
     parameters:
     - name: owner
       in: query
