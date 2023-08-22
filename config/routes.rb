@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get '/properties/bedrooms/:bedrooms', to: 'properties#by_bedrooms'
       get '/properties/bathrooms/:bathrooms', to: 'properties#by_bathrooms'
       get '/properties/addresses/:address', to: 'properties#by_address'
+      get "properties/filter/:property", to: "properties#by_filter"
     end
   end
 end

@@ -45,6 +45,22 @@ module Api
         render json: @properties, status: :ok
       end
 
+      def by_filter
+        properties = Property.where("owner = :owner OR property_type = :property_type OR
+        bedrooms = :bedrooms OR sitting_rooms = :sitting_rooms OR
+        kitchens = :kitchens OR bathrooms = :bathrooms OR
+        toilets = :toilets OR valid_to = :valid_to",
+                                owner: params[:owner], property_type: params[:property_type],
+                                bedrooms: params[:bedrooms], sitting_rooms: params[:sitting_rooms],
+                                kitchens: params[:kitchens], bathrooms: params[:bathrooms],
+                                toilets: params[:toilets], valid_to: params[:valid_to])
+        if properties.present?
+          render json: properties, status: 200
+        else
+          render json: { error: "No records found" }, status: 404
+        end
+      end
+
       def create
         @property = Property.new(property_params)
         if @property.save
